@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name='Trust Card',
-	version='0.0.0',
+	version='1.0.0',
 	long_description=open('README.md').read(),
 	license='GPL-3.0',
 	author='Macro303',

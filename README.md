@@ -22,3 +22,8 @@ _Description_ **[WIP]**
  4. Execute `pyinstaller --onefile trust-card.py` to create the executable
  5. Navigate to the **dist** folder to find the OS specific executable
  
+## Usage
+ - A **cards** folder will be created if it doesn't exist
+ - Store all your cards inside the **cards** folder as _yaml_ files, use the _default.yaml_ as an example
+ - For each _yaml_ file in the cards folder Trust Card will try and load it as usable card
+ - If you have more than one card, you will be asked on startup to select your card
