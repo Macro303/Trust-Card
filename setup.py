@@ -1,4 +1,4 @@
-#! ENV/Scripts/python
+#!/usr/bin/env python3
 
 from setuptools import setup, find_packages
 
@@ -11,5 +11,5 @@ setup(
 	author_email='',
 	url='https://github.com/Macro303/Trust-Card',
 	packages=find_packages(exclude=('test',)),
-	install_requires=['pyyaml >= 4.0.0']
+	install_requires=['pyyaml >= 4.0.0', 'colorama >= 0.3.0', 'PyInstaller >= 3.4']
 )

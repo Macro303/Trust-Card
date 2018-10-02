@@ -8,7 +8,9 @@ _Description_ **[WIP]**
 
 ## Dependencies
  - Python 3.7
- - PyYaml >= 4.0.0
+ - pyyaml >= 4.0.0
+ - colorama >= 0.3.9
+ - PyInstaller >= 3.4
 
 ## Execution
  1. Clone repo
@@ -18,7 +20,6 @@ _Description_ **[WIP]**
 ## Release
  1. Clone repo
  2. Execute `python setup.py install` to install dependencies
- 3. Execute `pip install pyinstaller`
  4. Execute `pyinstaller --onefile trust-card.py` to create the executable
  5. Navigate to the **dist** folder to find the OS specific executable
  
