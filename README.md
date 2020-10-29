@@ -5,7 +5,7 @@
 [![Visits](https://badges.pufler.dev/visits/Macro303/Trust-Card?style=flat-square)](https://badges.pufler.dev)
 [![License](https://img.shields.io/github/license/Macro303/Trust-Card.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-*TODO*
+Simple script to help you manage and use your Trust/Challenge cards
 
 ## Built Using
  - [Python: 3.9.0](https://www.python.org/)
