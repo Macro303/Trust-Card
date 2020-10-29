@@ -1,118 +1,86 @@
-#!/usr/bin/env python3
-
 from enum import Enum, unique
+from typing import Optional, List
 
-from colorama import init
+from colorama import init, Style, Fore
 
 init(autoreset=True, convert=True)
 
 
 @unique
 class Colour(Enum):
-	RESET = 1
-	BLACK = 2
-	RED = 3
-	GREEN = 4
-	YELLOW = 5
-	BLUE = 6
-	MAGENTA = 7
-	CYAN = 8
-	WHITE = 9
+    BLACK = Style.NORMAL, Fore.BLACK,
+    RED = Style.NORMAL, Fore.RED,
+    GREEN = Style.NORMAL, Fore.GREEN,
+    YELLOW = Style.NORMAL, Fore.YELLOW,
+    BLUE = Style.NORMAL, Fore.BLUE,
+    MAGENTA = Style.NORMAL, Fore.MAGENTA,
+    CYAN = Style.NORMAL, Fore.CYAN,
+    WHITE = Style.NORMAL, Fore.WHITE,
+    BRIGHT_BLACK = Style.BRIGHT, Fore.BLACK,
+    BRIGHT_RED = Style.BRIGHT, Fore.RED,
+    BRIGHT_GREEN = Style.BRIGHT, Fore.GREEN,
+    BRIGHT_YELLOW = Style.BRIGHT, Fore.YELLOW,
+    BRIGHT_BLUE = Style.BRIGHT, Fore.BLUE,
+    BRIGHT_MAGENTA = Style.BRIGHT, Fore.MAGENTA,
+    BRIGHT_CYAN = Style.BRIGHT, Fore.CYAN,
+    BRIGHT_WHITE = Style.BRIGHT, Fore.WHITE
 
-	def get_ansi(self) -> str:
-		if self.value == 2:
-			return "\u001B[30m"
-		if self.value == 3:
-			return "\u001B[31m"
-		if self.value == 4:
-			return "\u001B[32m"
-		if self.value == 5:
-			return "\u001B[33m"
-		if self.value == 6:
-			return "\u001B[34m"
-		if self.value == 7:
-			return "\u001B[35m"
-		if self.value == 8:
-			return "\u001B[36m"
-		if self.value == 9:
-			return "\u001B[37m"
-		return "\u001B[0m"
+    def __init__(self, style: Style, fore: Fore):
+        self.__style = style
+        self.__fore = fore
+
+        self.style = style + fore
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
+    def __str__(self) -> str:
+        return f"{type(self).__name__}({self.name})"
 
 
 class Console:
-	heading = Colour.CYAN
-	highlight = Colour.MAGENTA
-	error = Colour.RED
-	warning = Colour.YELLOW
-	standard = Colour.WHITE
-	input_colour = Colour.GREEN
-	ignore = Colour.BLUE
+    @classmethod
+    def display_heading(cls, heading: str):
+        size = len(heading) + 4
+        cls.__coloured_print(text='=' * size, colour=Colour.BRIGHT_CYAN)
+        cls.__coloured_print(text=f"  {heading}  ", colour=Colour.BRIGHT_CYAN)
+        cls.__coloured_print(text='=' * size, colour=Colour.BRIGHT_CYAN)
 
-	@classmethod
-	def display_heading(cls, title: str):
-		size = len(title) + 4
-		cls.__colour_console("=" * size, Console.heading)
-		cls.__colour_console(f"  {title}  ", Console.heading)
-		cls.__colour_console("=" * size, Console.heading)
+    @classmethod
+    def display(cls, text: str):
+        cls.__coloured_print(text=text)
 
-	@classmethod
-	def display_subheading(cls, title: str):
-		cls.__colour_console(title, Console.heading)
+    @classmethod
+    def display_error(cls, message: str, err: BaseException):
+        cls.__coloured_print(text=f"{message}: ", colour=Colour.BRIGHT_RED, end='')
+        cls.__coloured_print(text=str(err), colour=Colour.BRIGHT_YELLOW)
 
-	@classmethod
-	def display_old_new(cls, old: str, new: str):
-		cls.__colour_console(old, Console.standard, False)
-		cls.__colour_console(" --> ", Console.highlight, False)
-		cls.display(new)
+    @classmethod
+    def display_item_value(cls, item: str, value: str):
+        cls.__coloured_print(text=f"{item}: ", colour=Colour.BRIGHT_BLUE, end='')
+        cls.__coloured_print(text=value)
 
-	@classmethod
-	def display(cls, text: str):
-		cls.__colour_console(text, Console.standard)
+    @classmethod
+    def display_prompt(cls, prompt: Optional[str] = None) -> str:
+        prompt = f"{prompt}\n>> " if prompt else '>> '
+        cls.__coloured_print(text=prompt, colour=Colour.BRIGHT_BLUE, end='')
+        return input()
 
-	@classmethod
-	def display_highlight(cls, text: str):
-		cls.__colour_console(text, Console.highlight)
+    @classmethod
+    def display_menu(cls, heading: str, items: List[str], exit_text: str = None) -> int:
+        cls.display_heading(heading=heading)
+        if len(items) == 0:
+            return 0
+        for count in range(0, len(items)):
+            cls.display_item_value(item=str(count + 1), value=items[count])
+        if exit_text is not None:
+            cls.display_item_value(item="0", value=exit_text)
+        try:
+            return int(cls.display_prompt())
+        except ValueError as err:
+            cls.display_error(message="Invalid Number", err=err)
+            return 0
 
-	@classmethod
-	def display_ignored(cls, text: str):
-		cls.__colour_console(text, Console.ignore)
-
-	@classmethod
-	def display_error(cls, descriptor: str, err: BaseException):
-		cls.__colour_console(descriptor + ": ", Console.error, False)
-		cls.display_warning(str(err))
-
-	@classmethod
-	def display_warning(cls, text: str):
-		cls.__colour_console(text, Console.warning)
-
-	@classmethod
-	def display_item_value(cls, item: str, value: str):
-		cls.__colour_console(item + ": ", Console.highlight, False)
-		cls.display(value)
-
-	@classmethod
-	def display_prompt(cls, prompt: str) -> str:
-		cls.__colour_console(prompt, Console.input_colour)
-		entry = input(Console.input_colour.get_ansi() + ">> ")
-		print("", end="")
-		return entry
-
-	@classmethod
-	def display_menu(cls, heading: str, items, exit_text=None) -> int:
-		cls.display_heading(heading)
-		if len(items) == 0:
-			return 0
-		for count in range(0, len(items)):
-			cls.display_item_value(str(count + 1), items[count])
-		if exit_text is not None:
-			cls.display_item_value("0", exit_text)
-		try:
-			return int(cls.display_prompt("Option"))
-		except ValueError as err:
-			cls.display_error("Invalid Number", err)
-			return 0
-
-	@staticmethod
-	def __colour_console(text: str, colour, new_line=True):
-		print(colour.get_ansi() + str(text), end="\n" if new_line else "")
+    @classmethod
+    def __coloured_print(cls, text: str, colour: Colour = Colour.BRIGHT_WHITE, end: Optional[str] = None):
+        print(f"{colour.style}{text}{Style.RESET_ALL}", end=end)

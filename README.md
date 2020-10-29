@@ -1,16 +1,17 @@
 # Trust Card
-![Version](https://img.shields.io/github/tag/Macro303/Trust-Card.svg?label=version)
-![Issues](https://img.shields.io/github/issues/Macro303/Trust-Card.svg?label=issues)
-![Contributors](https://img.shields.io/github/contributors/Macro303/Trust-Card.svg?label=contributors)
-![License](https://img.shields.io/github/license/Macro303/Trust-Card.svg?=label=license)
+[![Version](https://img.shields.io/github/tag-pre/Macro303/Trust-Card.svg?label=version&style=flat-square)](https://github.com/Macro303/Trust-Card/releases)
+[![Issues](https://img.shields.io/github/issues/Macro303/Trust-Card.svg?style=flat-square)](https://github.com/Macro303/Trust-Card/issues)
+[![Contributors](https://img.shields.io/github/contributors/Macro303/Trust-Card.svg?style=flat-square)](https://github.com/Macro303/Trust-Card/graphs/contributors)
+[![Visits](https://badges.pufler.dev/visits/Macro303/Trust-Card?style=flat-square)](https://badges.pufler.dev)
+[![License](https://img.shields.io/github/license/Macro303/Trust-Card.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-_Description_ **[WIP]**
+*TODO*
 
-## Dependencies
- - Python 3.7
- - pyyaml >= 4.0.0
- - colorama >= 0.3.9
- - PyInstaller >= 3.4
+## Built Using
+ - [Python: 3.9.0](https://www.python.org/)
+ - [Colorama: 0.4.4](https://pypi.org/project/colorama/)
+ - [PyYaml: 5.3.1](https://pypi.org/project/PyYaml/)
+ - [PyInstaller: 4.0](https://pypi.org/project/PyInstaller/)
 
 ## Execution
  1. Clone repo
@@ -23,7 +24,7 @@ _Description_ **[WIP]**
  4. Execute `pyinstaller --onefile trust-card.py` to create the executable
  5. Navigate to the **dist** folder to find the OS specific executable
  
-## Usage
+## Notes
  - A **cards** folder will be created if it doesn't exist
  - Store all your cards inside the **cards** folder as _yaml_ files, use the _default.yaml_ as an example
  - For each _yaml_ file in the cards folder Trust Card will try and load it as usable card
