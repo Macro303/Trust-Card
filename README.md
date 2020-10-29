@@ -2,7 +2,6 @@
 [![Version](https://img.shields.io/github/tag-pre/Macro303/Trust-Card.svg?label=version&style=flat-square)](https://github.com/Macro303/Trust-Card/releases)
 [![Issues](https://img.shields.io/github/issues/Macro303/Trust-Card.svg?style=flat-square)](https://github.com/Macro303/Trust-Card/issues)
 [![Contributors](https://img.shields.io/github/contributors/Macro303/Trust-Card.svg?style=flat-square)](https://github.com/Macro303/Trust-Card/graphs/contributors)
-[![Visits](https://badges.pufler.dev/visits/Macro303/Trust-Card?style=flat-square)](https://badges.pufler.dev)
 [![License](https://img.shields.io/github/license/Macro303/Trust-Card.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 Simple script to help you manage and use your Trust/Challenge cards
