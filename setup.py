@@ -11,5 +11,5 @@ setup(
     author_email='',
     url='https://github.com/Macro303/Trust-Card',
     packages=find_packages(exclude=('test',)),
-    install_requires=['pyyaml == 5.3.1', 'colorama == 0.4.3', 'PyInstaller == 4.0']
+    install_requires=['pyyaml == 5.4.1', 'colorama == 0.4.3', 'PyInstaller == 4.0']
 )
